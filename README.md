@@ -1,2 +1,2 @@
 # TriviaGame
-A trivia game written in React.
+A trivia game created with React.
