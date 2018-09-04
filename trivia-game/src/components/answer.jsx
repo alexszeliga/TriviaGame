@@ -3,7 +3,10 @@ import React, { Component } from "react";
 class Answer extends Component {
   render() {
     return (
-      <div onClick={() => this.props.onGuess(this.props.id)}>
+      <div
+        className={this.props.answerText !== "" && "row alert alert-secondary"}
+        onClick={() => this.props.onGuess(this.props.id)}
+      >
         {this.props.answerText}
       </div>
     );

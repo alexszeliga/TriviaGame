@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 
 class Question extends Component {
-  state = {};
   render() {
-    return <div>{this.props.questionText}</div>;
+    return (
+      <div className="row alert alert-primary">{this.props.questionText}</div>
+    );
   }
 }
 
