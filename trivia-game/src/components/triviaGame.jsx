@@ -7,7 +7,7 @@ class TriviaGame extends Component {
   state = {
     gameQuestions: [
       {
-        text: "Init state: press any key to start game",
+        text: "Init state: Click here to start game",
         answers: [
           { text: "", correct: false, id: 0 },
           { text: "", correct: false, id: 1 },
@@ -41,9 +41,24 @@ class TriviaGame extends Component {
   handleClick = () => {
     if (this.state.gameState === 0) {
       this.setState({ gameState: this.state.gameState + 1 });
-      console.log(this.state.gameState);
+      //   console.log(this.state.gameState);
     } else {
-      // do nothing; games started
+      //   console.log(this.state.gameState);
+    }
+  };
+  handleGuess = answerId => {
+    console.log("test", answerId);
+    // console.log(
+    //   this.state.gameQuestions[this.state.gameState].answers[answerId].correct
+    // );
+    if (
+      this.state.gameQuestions[this.state.gameState].answers[answerId].correct
+    ) {
+      console.log("Correct");
+      this.setState({ gameState: this.state.gameState + 1 });
+    } else {
+      //   console.log("Incorrect");
+      //   console.log(this);
     }
   };
   render() {
@@ -54,7 +69,7 @@ class TriviaGame extends Component {
           questionText={this.state.gameQuestions[this.state.gameState].text}
         />
         <AnswerBank
-          //   onGuess={this.handleGuess}
+          onGuess={this.handleGuess}
           answerBank={this.state.gameQuestions[this.state.gameState].answers}
         />
       </div>
