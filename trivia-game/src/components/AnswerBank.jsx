@@ -1,35 +1,27 @@
 import React, { Component } from "react";
+import Answer from "./answer";
 
 class AnswerBank extends Component {
-  render() {
-    let wrongAnswerArray = this.props.questionData.questionArray[
-      this.props.questionData.randomlySelectedQuestionIndex
-    ].wrongAnswers;
-    wrongAnswerArray.push(
-      this.props.questionData.questionArray[
-        this.props.questionData.randomlySelectedQuestionIndex
-      ].answerText
-    );
-
-    function shuffleArray(array) {
-      let j, x, i;
-      for (i = array.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = array[i];
-        array[i] = array[j];
-        array[j] = x;
-      }
+  state = {};
+  handleGuess = answerId => {
+    console.log("test", answerId);
+    if (this.props.answerBank[answerId].correct) {
+      console.log("Correct");
+    } else {
+      console.log("Incorrect");
     }
-
-    shuffleArray(wrongAnswerArray);
-    console.log(wrongAnswerArray);
+  };
+  render() {
     return (
       <div>
-        <h5>This is AnswerBank:</h5>
-        <h3>{wrongAnswerArray[0]}</h3>
-        <h3>{wrongAnswerArray[1]}</h3>
-        <h3>{wrongAnswerArray[2]}</h3>
-        <h3>{wrongAnswerArray[3]}</h3>
+        {this.props.answerBank.map(answer => (
+          <Answer
+            onGuess={this.handleGuess}
+            key={answer.id}
+            id={answer.id}
+            answerText={this.props.answerBank[answer.id].text}
+          />
+        ))}
       </div>
     );
   }
