@@ -45,15 +45,15 @@ class TriviaGame extends Component {
               switch (this.state.timeLeft) {
                 case 15:
                   // down to 10
-                  this.setState({ timeLeft: 10 });
+                  this.setState({ timeLeft: 10, defaultTime: 10 });
                   break;
                 case 10:
                   //down to 7
-                  this.setState({ timeLeft: 7 });
+                  this.setState({ timeLeft: 7, defaultTime: 7 });
                   break;
                 case 7:
                   // up to 15
-                  this.setState({ timeLeft: 15 });
+                  this.setState({ timeLeft: 15, defaultTime: 15 });
                   break;
                 default:
                   break;
@@ -193,6 +193,7 @@ class TriviaGame extends Component {
     ],
     gameState: 0,
     timeLeft: 10,
+    defaultTime: 10,
     livesLeft: 3,
     difficultyLevel: 0,
     remainingQuestions: 10,
