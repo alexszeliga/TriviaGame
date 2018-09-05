@@ -10,10 +10,89 @@ class TriviaGame extends Component {
       {
         text: "Init state: Click here to start game",
         answers: [
-          { text: "Number of Questions: ", correct: false, id: 0 },
-          { text: "Difficulty: ", correct: false, id: 1 },
-          { text: "Lives: ", correct: false, id: 2 },
-          { text: "Sound: ", correct: false, id: 3 }
+          {
+            text: "Number of Questions: ",
+            correct: false,
+            id: 0,
+            changeOption: () => {
+              console.log("Change clicked");
+              //TODO 3, 6, or 10 questions
+              switch (this.state.remainingQuestions) {
+                case 10:
+                  // down to 6
+                  this.setState({ remainingQuestions: 6 });
+                  break;
+                case 6:
+                  //down to 3
+                  this.setState({ remainingQuestions: 3 });
+                  break;
+                case 3:
+                  // up to 10
+                  this.setState({ remainingQuestions: 10 });
+                  break;
+                default:
+                  break;
+              }
+            }
+          },
+          {
+            text: "Difficulty: ",
+            correct: false,
+            id: 1,
+            changeOption: () => {
+              console.log("Change Option Clicked");
+              // TODO Easy, Medium, Hard (15 seconds per q, 10sec, 7sec)
+              switch (this.state.timeLeft) {
+                case 15:
+                  // down to 10
+                  this.setState({ timeLeft: 10 });
+                  break;
+                case 10:
+                  //down to 7
+                  this.setState({ timeLeft: 7 });
+                  break;
+                case 7:
+                  // up to 15
+                  this.setState({ timeLeft: 15 });
+                  break;
+                default:
+                  break;
+              }
+            }
+          },
+          {
+            text: "Lives: ",
+            correct: false,
+            id: 2,
+            changeOption: () => {
+              console.log("Change Option Clicked");
+              // TODO: Lives 3, 2, or 1.
+              switch (this.state.livesLeft) {
+                case 3:
+                  // down to 2
+                  this.setState({ livesLeft: 2 });
+                  break;
+                case 2:
+                  // down to 1
+                  this.setState({ livesLeft: 1 });
+                  break;
+                case 1:
+                  // up to 3
+                  this.setState({ livesLeft: 3 });
+                  break;
+                default:
+                  break;
+              }
+            }
+          },
+          {
+            text: "Sound: ",
+            correct: false,
+            id: 3,
+            changeOption: () => {
+              console.log("Change Option Clicked");
+            }
+          }
         ]
       },
       {
@@ -118,7 +197,8 @@ class TriviaGame extends Component {
     difficultyLevel: 0,
     remainingQuestions: 10,
     wasAnAnswerProvided: false,
-    gameTimer: undefined
+    gameTimer: undefined,
+    playSound: false
   };
   timerTick = () => {
     if (this.state.timeLeft > 0) {
@@ -150,8 +230,13 @@ class TriviaGame extends Component {
   };
   handleGuess = answerId => {
     // TODO Stop the timer
-    console.log("test", answerId);
-    if (
+    console.log("Clicked button ID (0 indexed): ", answerId);
+    if (this.state.gameState === 0) {
+      // Todo: Change options
+      this.state.gameQuestions[this.state.gameState].answers[
+        answerId
+      ].changeOption();
+    } else if (
       this.state.gameQuestions[this.state.gameState].answers[answerId].correct
     ) {
       console.log("Correct");
@@ -170,13 +255,14 @@ class TriviaGame extends Component {
   render() {
     return (
       // TODO game progression through multiple questions
-      <div onClick={this.handleClick}>
+      <div>
         <StatusBar
           timeLeft={this.state.timeLeft}
           livesLeft={this.state.livesLeft}
           remainingQuestions={this.state.remainingQuestions}
         />
         <Question
+          onClick={this.handleClick}
           questionText={this.state.gameQuestions[this.state.gameState].text}
         />
         <AnswerBank
