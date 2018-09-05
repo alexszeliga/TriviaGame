@@ -38,38 +38,133 @@ class TriviaGame extends Component {
           { text: "Test answer number three", correct: true, id: 2 },
           { text: "Test answer number four", correct: false, id: 3 }
         ]
+      },
+      {
+        text: "Test question number Three",
+        answers: [
+          { text: "Test answer number one", correct: false, id: 0 },
+          { text: "Test answer number two", correct: false, id: 1 },
+          { text: "Test answer number three", correct: true, id: 2 },
+          { text: "Test answer number four", correct: false, id: 3 }
+        ]
+      },
+      {
+        text: "Test question number Four",
+        answers: [
+          { text: "Test answer number one", correct: false, id: 0 },
+          { text: "Test answer number two", correct: false, id: 1 },
+          { text: "Test answer number three", correct: true, id: 2 },
+          { text: "Test answer number four", correct: false, id: 3 }
+        ]
+      },
+      {
+        text: "Test question number Five",
+        answers: [
+          { text: "Test answer number one", correct: false, id: 0 },
+          { text: "Test answer number two", correct: false, id: 1 },
+          { text: "Test answer number three", correct: true, id: 2 },
+          { text: "Test answer number four", correct: false, id: 3 }
+        ]
+      },
+      {
+        text: "Test question number six",
+        answers: [
+          { text: "Test answer number one", correct: false, id: 0 },
+          { text: "Test answer number two", correct: false, id: 1 },
+          { text: "Test answer number three", correct: true, id: 2 },
+          { text: "Test answer number four", correct: false, id: 3 }
+        ]
+      },
+      {
+        text: "Test question number seven",
+        answers: [
+          { text: "Test answer number one", correct: false, id: 0 },
+          { text: "Test answer number two", correct: false, id: 1 },
+          { text: "Test answer number three", correct: true, id: 2 },
+          { text: "Test answer number four", correct: false, id: 3 }
+        ]
+      },
+      {
+        text: "Test question number eight",
+        answers: [
+          { text: "Test answer number one", correct: false, id: 0 },
+          { text: "Test answer number two", correct: false, id: 1 },
+          { text: "Test answer number three", correct: true, id: 2 },
+          { text: "Test answer number four", correct: false, id: 3 }
+        ]
+      },
+      {
+        text: "Test question number nine",
+        answers: [
+          { text: "Test answer number one", correct: false, id: 0 },
+          { text: "Test answer number two", correct: false, id: 1 },
+          { text: "Test answer number three", correct: true, id: 2 },
+          { text: "Test answer number four", correct: false, id: 3 }
+        ]
+      },
+      {
+        text: "Test question number ten",
+        answers: [
+          { text: "Test answer number one", correct: false, id: 0 },
+          { text: "Test answer number two", correct: false, id: 1 },
+          { text: "Test answer number three", correct: true, id: 2 },
+          { text: "Test answer number four", correct: false, id: 3 }
+        ]
       }
     ],
     gameState: 0,
     timeLeft: 10,
     livesLeft: 3,
     difficultyLevel: 0,
-    remainingQuestions: 10
+    remainingQuestions: 10,
+    wasAnAnswerProvided: false,
+    gameTimer: undefined
   };
-
+  timerTick = () => {
+    if (this.state.timeLeft > 0) {
+      this.setState({ timeLeft: this.state.timeLeft - 1 });
+      console.log(this.state.timeLeft);
+    } else {
+      clearInterval(this.state.gameTimer);
+      console.log("Timer ended at 0");
+      this.handleNoGuess();
+    }
+  };
   handleClick = () => {
     if (this.state.gameState === 0) {
       this.setState({ gameState: this.state.gameState + 1 });
+      // TODO Start timer
+
+      this.setState({ gameTimer: setInterval(this.timerTick, 1000) });
+
       //   console.log(this.state.gameState);
     } else {
       //   console.log(this.state.gameState);
     }
   };
+
+  handleNoGuess = () => {
+    // what happens if the timer runs out and no answer is given?
+    // will track boolean "state.wasAnAnswerProvided"
+    console.log("No Guess!");
+  };
   handleGuess = answerId => {
+    // TODO Stop the timer
     console.log("test", answerId);
-    // console.log(
-    //   this.state.gameQuestions[this.state.gameState].answers[answerId].correct
-    // );
     if (
       this.state.gameQuestions[this.state.gameState].answers[answerId].correct
     ) {
       console.log("Correct");
-      if (this.state.gameState <= this.state.gameQuestions.length) {
+      console.log(this.state.gameState, this.state.gameQuestions.length - 2);
+      if (this.state.gameState <= this.state.gameQuestions.length - 2) {
         this.setState({ gameState: this.state.gameState + 1 });
+      } else {
+        // TODO gameover state, re-init
+        alert("poop");
       }
     } else {
-      //   console.log("Incorrect");
-      //   console.log(this);
+      console.log("Incorrect");
+      this.setState({ gamestate: this.state.gameState + 1 });
     }
   };
   render() {
