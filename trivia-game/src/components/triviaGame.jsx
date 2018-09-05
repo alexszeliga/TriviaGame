@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Question from "./question";
 import AnswerBank from "./answerBank";
+import StatusBar from "./statusBar";
 
 class TriviaGame extends Component {
   // TODO add more questions
@@ -9,19 +10,23 @@ class TriviaGame extends Component {
       {
         text: "Init state: Click here to start game",
         answers: [
-          { text: "", correct: false, id: 0 },
-          { text: "", correct: false, id: 1 },
-          { text: "", correct: false, id: 2 },
-          { text: "", correct: false, id: 3 }
+          { text: "Number of Questions: ", correct: false, id: 0 },
+          { text: "Difficulty: ", correct: false, id: 1 },
+          { text: "Lives: ", correct: false, id: 2 },
+          { text: "Sound: ", correct: false, id: 3 }
         ]
       },
       {
-        text: "Test question number one",
+        text: "Where is the London Bridge currently located?",
         answers: [
-          { text: "Test answer number one", correct: true, id: 0 },
-          { text: "Test answer number two", correct: false, id: 1 },
-          { text: "Test answer number three", correct: false, id: 2 },
-          { text: "Test answer number four", correct: false, id: 3 }
+          { text: "Lake Havasu City, Arizona, USA", correct: true, id: 0 },
+          { text: "Dubai, UAE", correct: false, id: 1 },
+          {
+            text: "The Nürburgring, Nürburg, Rhineland-Palatinate, GER",
+            correct: false,
+            id: 2
+          },
+          { text: "That's offensive. I'm not answering", correct: false, id: 3 }
         ]
       },
 
@@ -35,7 +40,11 @@ class TriviaGame extends Component {
         ]
       }
     ],
-    gameState: 0
+    gameState: 0,
+    timeLeft: 10,
+    livesLeft: 3,
+    difficultyLevel: 0,
+    remainingQuestions: 10
   };
 
   handleClick = () => {
@@ -55,7 +64,9 @@ class TriviaGame extends Component {
       this.state.gameQuestions[this.state.gameState].answers[answerId].correct
     ) {
       console.log("Correct");
-      this.setState({ gameState: this.state.gameState + 1 });
+      if (this.state.gameState <= this.state.gameQuestions.length) {
+        this.setState({ gameState: this.state.gameState + 1 });
+      }
     } else {
       //   console.log("Incorrect");
       //   console.log(this);
@@ -65,6 +76,11 @@ class TriviaGame extends Component {
     return (
       // TODO game progression through multiple questions
       <div onClick={this.handleClick}>
+        <StatusBar
+          timeLeft={this.state.timeLeft}
+          livesLeft={this.state.livesLeft}
+          remainingQuestions={this.state.remainingQuestions}
+        />
         <Question
           questionText={this.state.gameQuestions[this.state.gameState].text}
         />

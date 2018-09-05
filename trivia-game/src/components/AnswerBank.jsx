@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Answer from "./answer";
 
 class AnswerBank extends Component {
-  state = {};
-
   render() {
     return (
       <div>
