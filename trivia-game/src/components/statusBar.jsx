@@ -9,13 +9,14 @@ class StatusBar extends Component {
     let remainingClasses = classes;
 
     timeClasses += this.props.timeLeft < 11 ? "warning" : "success";
-    liveClasses += this.props.livesLeft < 3 ? "warning" : "success";
+    liveClasses +=
+      this.props.gameMessage === "Correct!" ? "success" : "primary";
     remainingClasses +=
       this.props.remainingQuestions < 7 ? "warning" : "success";
     return (
       <div className="row">
         <div className={timeClasses}>Time left: {this.props.timeLeft}</div>
-        <div className={liveClasses}>Lives Left: {this.props.livesLeft}</div>
+        <div className={liveClasses}>{this.props.gameMessage}</div>
         <div className={remainingClasses}>
           Questions Remaining: {this.props.remainingQuestions}
         </div>

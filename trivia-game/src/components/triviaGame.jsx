@@ -64,29 +64,9 @@ class TriviaGame extends Component {
             }
           },
           {
-            text: "Lives: ",
+            text: "",
             correct: false,
-            id: 2,
-            changeOption: () => {
-              console.log("Change Option Clicked");
-              // TODO: Lives 3, 2, or 1.
-              switch (this.state.livesLeft) {
-                case 3:
-                  // down to 2
-                  this.setState({ livesLeft: 2 });
-                  break;
-                case 2:
-                  // down to 1
-                  this.setState({ livesLeft: 1 });
-                  break;
-                case 1:
-                  // up to 3
-                  this.setState({ livesLeft: 3 });
-                  break;
-                default:
-                  break;
-              }
-            }
+            id: 2
           },
           {
             text: "Created by Alex Szeliga in 2018",
@@ -192,25 +172,38 @@ class TriviaGame extends Component {
           { text: "Test answer number three", correct: true, id: 2 },
           { text: "Test answer number four", correct: false, id: 3 }
         ]
+      },
+      {
+        text: "Endgame Mode: Do things like score and stats and restart here.",
+        answers: [
+          {
+            text: "Score: total correct, percentage; w/e",
+            correct: false,
+            id: 0
+          },
+          { text: "Time stats?", correct: false, id: 1 },
+          { text: "Restart Game", correct: true, id: 2 },
+          { text: "Created by Alex Szeliga in 2018", correct: false, id: 3 }
+        ]
       }
     ],
     gameState: 0,
     timeLeft: 15,
     defaultTime: 15,
-    livesLeft: 3,
     remainingQuestions: 10,
     gameTimer: undefined,
     playSound: false,
     correctAnswers: 0,
-    totalQuestions: 10
+    totalQuestions: 10,
+    gameMessage: ""
   };
   timerTick = () => {
     if (this.state.timeLeft > 0) {
       this.setState({ timeLeft: this.state.timeLeft - 1 });
-      console.log(this.state.timeLeft);
+      //   console.log(this.state.timeLeft);
     } else {
       clearInterval(this.state.gameTimer);
-      console.log("Timer ended at 0");
+      //   console.log("Timer ended at 0");
       this.handleResult(false);
     }
   };
@@ -236,8 +229,22 @@ class TriviaGame extends Component {
         }
         break;
       case this.state.totalQuestions:
+        this.setState({
+          remainingQuestions: this.state.remainingQuestions - 1
+        });
         {
-          alert("endgame mode");
+          // todo: create endgame
+          if (
+            this.state.gameQuestions[this.state.gameState].answers[answerId]
+              .correct
+          ) {
+            //add 1 correct
+            this.setState({ correctAnswers: this.state.correctAnswers + 1 });
+          } else {
+            // nothing
+          }
+          clearInterval(this.state.gameTimer);
+          this.setState({ gameState: 11 });
         }
         break;
       default:
@@ -260,51 +267,39 @@ class TriviaGame extends Component {
         }
         break;
     }
-
-    // if (this.state.gameState === 0) {
-    //   // therefor, when you click, it Changes options
-    //   this.state.gameQuestions[this.state.gameState].answers[
-    //     answerId
-    //   ].changeOption();
-    // } else if (
-    //   this.state.gameQuestions[this.state.gameState].answers[answerId]
-    //     .correct &&
-    //   this.state.gameState < this.state.totalQuestions + 1
-    // ) {
-    //   // console.log("Correct")
-    //   this.handleResult(true);
-    // } else if (
-    //   this.state.gameQuestions[this.state.gameState].answers[answerId]
-    //     .correct === false &&
-    //   this.state.gameState < this.state.totalQuestions + 1
-    // ) {
-    //   //   console.log("Incorrect");
-    //   this.handleResult(false);
-    // }
   };
   handleResult = result => {
-    // Stop the timer
-    clearInterval(this.state.gameTimer);
-    // iterate game state
-    this.setState({ gameState: this.state.gameState + 1 });
-    // count down questions
-    this.setState({ remainingQuestions: this.state.remainingQuestions - 1 });
-    // reset timer
-    this.setState({ timeLeft: this.state.defaultTime });
     if (result) {
       console.log("correct");
       this.setState({ correctAnswers: this.state.correctAnswers + 1 });
+      this.setState({ gameMessage: "Correct!" });
     } else {
       console.log("Incorrect");
+      this.setState({ gameMessage: "Wrong." });
     }
+    // Stop the timer
+    clearInterval(this.state.gameTimer);
+    // count down questions
+    setTimeout(this.iterateGameState, 3000);
+  };
+
+  iterateGameState = () => {
+    this.setState({ gameMessage: "" });
+    this.setState({ remainingQuestions: this.state.remainingQuestions - 1 });
+    // reset timer
+    this.setState({ timeLeft: this.state.defaultTime });
+    // iterate game state
+    this.setState({ gameState: this.state.gameState + 1 });
+    //start the timer
+    this.setState({ gameTimer: setInterval(this.timerTick, 1000) });
   };
   render() {
     return (
       <div>
         <StatusBar
           timeLeft={this.state.timeLeft}
-          livesLeft={this.state.livesLeft}
           remainingQuestions={this.state.remainingQuestions}
+          gameMessage={this.state.gameMessage}
         />
         <Question
           onStart={this.handleClick}
