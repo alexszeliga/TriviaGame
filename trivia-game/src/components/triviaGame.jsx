@@ -211,46 +211,76 @@ class TriviaGame extends Component {
     } else {
       clearInterval(this.state.gameTimer);
       console.log("Timer ended at 0");
-      this.handleResult();
+      this.handleResult(false);
     }
   };
   handleClick = () => {
     // console.log("you clicked the question");
     if (this.state.gameState === 0) {
+      // this is the only place where you iterate the gamestate without handleResult
       this.setState({ gameState: this.state.gameState + 1 });
       // Start timer
       this.setState({ gameTimer: setInterval(this.timerTick, 1000) });
-
-      //   console.log(this.state.gameState);
-    } else {
-      //   console.log(this.state.gameState);
     }
   };
 
   handleGuess = answerId => {
-    console.log("Clicked button ID (0 indexed): ", answerId);
-    if (this.state.gameState === 0) {
-      // Change options
-      this.state.gameQuestions[this.state.gameState].answers[
-        answerId
-      ].changeOption();
-    } else if (
-      this.state.gameQuestions[this.state.gameState].answers[answerId].correct
-    ) {
-      //   console.log("Correct");
-
-      //   console.log(this.state.gameState, this.state.gameQuestions.length - 2);
-      if (this.state.gameState <= this.state.gameQuestions.length - 2) {
-        this.handleResult(true);
-      } else {
-        // TODO gameover state, re-init
-        alert("poop");
-      }
-    } else {
-      //   console.log("Incorrect");
-      this.handleResult(false);
-      this.setState({ gamestate: this.state.gameState + 1 });
+    // console.log("Clicked button ID (0 indexed): ", answerId);
+    // if the gamestate is 0, the game hasn't started yet.
+    switch (this.state.gameState) {
+      case 0:
+        {
+          this.state.gameQuestions[this.state.gameState].answers[
+            answerId
+          ].changeOption();
+        }
+        break;
+      case this.state.totalQuestions:
+        {
+          alert("endgame mode");
+        }
+        break;
+      default:
+        {
+          if (
+            this.state.gameQuestions[this.state.gameState].answers[answerId]
+              .correct &&
+            this.state.gameState < this.state.totalQuestions + 1
+          ) {
+            // console.log("Correct")
+            this.handleResult(true);
+          } else if (
+            this.state.gameQuestions[this.state.gameState].answers[answerId]
+              .correct === false &&
+            this.state.gameState < this.state.totalQuestions + 1
+          ) {
+            //   console.log("Incorrect");
+            this.handleResult(false);
+          }
+        }
+        break;
     }
+
+    // if (this.state.gameState === 0) {
+    //   // therefor, when you click, it Changes options
+    //   this.state.gameQuestions[this.state.gameState].answers[
+    //     answerId
+    //   ].changeOption();
+    // } else if (
+    //   this.state.gameQuestions[this.state.gameState].answers[answerId]
+    //     .correct &&
+    //   this.state.gameState < this.state.totalQuestions + 1
+    // ) {
+    //   // console.log("Correct")
+    //   this.handleResult(true);
+    // } else if (
+    //   this.state.gameQuestions[this.state.gameState].answers[answerId]
+    //     .correct === false &&
+    //   this.state.gameState < this.state.totalQuestions + 1
+    // ) {
+    //   //   console.log("Incorrect");
+    //   this.handleResult(false);
+    // }
   };
   handleResult = result => {
     // Stop the timer
