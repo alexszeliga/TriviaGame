@@ -93,96 +93,152 @@ class TriviaGame extends Component {
       },
 
       {
-        text: "Test question number Two",
+        text:
+          "A boy and his father are in a car accident; the boy is rushed to the hospital for surgery, but the surgeon protests 'I cannot perform surgery on this boy'...why?",
         answers: [
-          { text: "Test answer number one", correct: false, id: 0 },
-          { text: "Test answer number two", correct: false, id: 1 },
-          { text: "Test answer number three", correct: true, id: 2 },
-          { text: "Test answer number four", correct: false, id: 3 }
+          { text: "Pass", correct: false, id: 0 },
+          { text: "The surgeon is his mother", correct: true, id: 1 },
+          { text: "His Porsche was in the shop", correct: false, id: 2 },
+          {
+            text: "Band on the Run by Paul McCartney's doppleganger and Wings",
+            correct: false,
+            id: 3
+          }
         ]
       },
       {
-        text: "Test question number Three",
+        text: "How many dogs is the correct number of dogs?",
         answers: [
-          { text: "Test answer number one", correct: false, id: 0 },
-          { text: "Test answer number two", correct: false, id: 1 },
-          { text: "Test answer number three", correct: true, id: 2 },
-          { text: "Test answer number four", correct: false, id: 3 }
+          { text: "I'm more of a cat person", correct: false, id: 0 },
+          {
+            text: "One; we don't need puppies running around.",
+            correct: false,
+            id: 1
+          },
+          { text: "n = n + 1", correct: false, id: 2 },
+          { text: "Two. Three is too many.", correct: true, id: 3 }
         ]
       },
       {
-        text: "Test question number Four",
+        text:
+          "A squid eating dough in a polyethylene bag is fast and bulbous, got me?",
         answers: [
-          { text: "Test answer number one", correct: false, id: 0 },
-          { text: "Test answer number two", correct: false, id: 1 },
-          { text: "Test answer number three", correct: true, id: 2 },
-          { text: "Test answer number four", correct: false, id: 3 }
+          { text: "I'm don't think I do.", correct: false, id: 0 },
+          { text: "That sounds inhumane.", correct: false, id: 1 },
+          { text: "Yes, the Mascara Snake", correct: true, id: 2 },
+          { text: "Jim Carrey in The Truman Show(1998)", correct: false, id: 3 }
         ]
       },
       {
-        text: "Test question number Five",
+        text: "What is Minnesota Tischmann doing?",
         answers: [
-          { text: "Test answer number one", correct: false, id: 0 },
-          { text: "Test answer number two", correct: false, id: 1 },
-          { text: "Test answer number three", correct: true, id: 2 },
-          { text: "Test answer number four", correct: false, id: 3 }
+          { text: "I keep eating and eating.", correct: false, id: 0 },
+          { text: "I'm sorry, what?", correct: false, id: 1 },
+          { text: "Test answer number three", correct: false, id: 2 },
+          { text: "He's using a chicken to measure it.", correct: true, id: 3 }
         ]
       },
       {
-        text: "Test question number six",
+        text: "Mr. President, where can I get a job?",
         answers: [
-          { text: "Test answer number one", correct: false, id: 0 },
-          { text: "Test answer number two", correct: false, id: 1 },
-          { text: "Test answer number three", correct: true, id: 2 },
-          { text: "Test answer number four", correct: false, id: 3 }
+          {
+            text:
+              "You know, the main spring of this country, wound up as tight as it is, is guaranteed for the life of the watch",
+            correct: false,
+            id: 0
+          },
+          { text: "Right on; he's jivin' me again.", correct: false, id: 1 },
+          { text: "The Job Displacement Market Program", correct: true, id: 2 },
+          { text: "No.", correct: false, id: 3 }
         ]
       },
       {
-        text: "Test question number seven",
+        text: "Why does the porridge bird lay it's egg in the air?",
         answers: [
-          { text: "Test answer number one", correct: false, id: 0 },
-          { text: "Test answer number two", correct: false, id: 1 },
-          { text: "Test answer number three", correct: true, id: 2 },
-          { text: "Test answer number four", correct: false, id: 3 }
+          { text: "Goshen, PA", correct: false, id: 0 },
+          { text: "Goshen, ID", correct: false, id: 1 },
+          { text: "Goshen, CA", correct: false, id: 2 },
+          { text: "No.", correct: true, id: 3 }
         ]
       },
       {
-        text: "Test question number eight",
+        text: "What's that on your shirt?",
         answers: [
-          { text: "Test answer number one", correct: false, id: 0 },
-          { text: "Test answer number two", correct: false, id: 1 },
-          { text: "Test answer number three", correct: true, id: 2 },
-          { text: "Test answer number four", correct: false, id: 3 }
+          { text: "Look down at your shirt", correct: false, id: 0 },
+          {
+            text: "'I got some sauce on it; I had chili dogs.'",
+            correct: true,
+            id: 1
+          },
+          {
+            text:
+              "Blame it on the third dog. You never should have gotten a third dog. Three is too many.",
+            correct: false,
+            id: 2
+          },
+          {
+            text:
+              "Smile and laught out loud, but intently study them to see if they were just being nice",
+            correct: false,
+            id: 3
+          }
         ]
       },
       {
-        text: "Test question number nine",
+        text:
+          "Do you think old what's-his-name up there in the Whitehouse has ever gotten writers block?",
         answers: [
-          { text: "Test answer number one", correct: false, id: 0 },
-          { text: "Test answer number two", correct: false, id: 1 },
-          { text: "Test answer number three", correct: true, id: 2 },
-          { text: "Test answer number four", correct: false, id: 3 }
+          {
+            text: "Politics is a third rail; just don't touch it.",
+            correct: false,
+            id: 0
+          },
+          {
+            text:
+              "'If there's just two songs in ya, boy, what do you want from me?",
+            correct: true,
+            id: 1
+          },
+          {
+            text: "I don't have good recall for song lyrics.",
+            correct: false,
+            id: 2
+          },
+          { text: "Please call me 'Sir'.", correct: false, id: 3 }
         ]
       },
       {
-        text: "Test question number ten",
+        text: "What is yacht rock?",
         answers: [
-          { text: "Test answer number one", correct: false, id: 0 },
-          { text: "Test answer number two", correct: false, id: 1 },
-          { text: "Test answer number three", correct: true, id: 2 },
-          { text: "Test answer number four", correct: false, id: 3 }
+          { text: "Just another way to slice it.", correct: false, id: 0 },
+          { text: "Festive, joyous, and harmonious.", correct: false, id: 1 },
+          {
+            text:
+              "Another way to divide 80's pop music well after people stopped caring",
+            correct: true,
+            id: 2
+          },
+          {
+            text: "I don't know, but we're takin' it to the streets!",
+            correct: false,
+            id: 3
+          }
         ]
       },
       {
         text: "Endgame Mode: Do things like score and stats and restart here.",
         answers: [
           {
-            text: "Score: total correct, percentage; w/e",
+            text: "Total Correct: " + this.totalOutput,
             correct: false,
             id: 0
           },
           { text: "Time stats?", correct: false, id: 1 },
-          { text: "Restart Game", correct: true, id: 2 },
+          {
+            text: "Restart Game",
+            correct: false,
+            id: 2
+          },
           { text: "Created by Alex Szeliga in 2018", correct: false, id: 3 }
         ]
       }
@@ -195,7 +251,8 @@ class TriviaGame extends Component {
     playSound: false,
     correctAnswers: 0,
     totalQuestions: 10,
-    gameMessage: ""
+    gameMessage: "",
+    answerArray: ["", "", "", ""]
   };
   timerTick = () => {
     if (this.state.timeLeft > 0) {
@@ -217,6 +274,10 @@ class TriviaGame extends Component {
     }
   };
 
+  totalOutput = () => {
+    return this.state.totalCorrect / this.state.totalQuestions;
+  };
+
   handleGuess = answerId => {
     // console.log("Clicked button ID (0 indexed): ", answerId);
     // if the gamestate is 0, the game hasn't started yet.
@@ -232,20 +293,24 @@ class TriviaGame extends Component {
         this.setState({
           remainingQuestions: this.state.remainingQuestions - 1
         });
-        {
-          // todo: create endgame
-          if (
-            this.state.gameQuestions[this.state.gameState].answers[answerId]
-              .correct
-          ) {
-            //add 1 correct
-            this.setState({ correctAnswers: this.state.correctAnswers + 1 });
-          } else {
-            // nothing
-          }
-          clearInterval(this.state.gameTimer);
-          this.setState({ gameState: 11 });
+
+        // endgame
+        console.log("endgame");
+        // this.state.gameQuestions[11].answers[0].text
+        if (
+          this.state.gameQuestions[this.state.gameState].answers[answerId]
+            .correct
+        ) {
+          //add 1 correct
+          this.setState({ correctAnswers: this.state.correctAnswers + 1 });
+          this.setState({ gameMessage: "Correct!" });
+        } else {
+          // nothing
+          this.setState({ gameMessage: "Wrong." });
         }
+        clearInterval(this.state.gameTimer);
+        this.setState({ gameState: 11 });
+
         break;
       default:
         {
@@ -308,6 +373,9 @@ class TriviaGame extends Component {
         <AnswerBank
           onGuess={this.handleGuess}
           answerBank={this.state.gameQuestions[this.state.gameState].answers}
+          totalCorrect={this.state.correctAnswers}
+          gameState={this.state.gameState}
+          totalQuestions={this.state.totalQuestions}
         />
       </div>
     );
