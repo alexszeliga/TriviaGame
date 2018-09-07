@@ -248,7 +248,6 @@ class TriviaGame extends Component {
     defaultTime: 15,
     remainingQuestions: 10,
     gameTimer: undefined,
-    playSound: false,
     correctAnswers: 0,
     totalQuestions: 10,
     gameMessage: "",
@@ -361,6 +360,8 @@ class TriviaGame extends Component {
     this.setState({ gameState: 0 });
     this.setState({ remainingQuestions: this.state.totalQuestions });
     this.setState({ timeLeft: this.state.defaultTime });
+    this.setState({ correctAnswers: 0 });
+    this.setState({ gameMessage: "" });
   };
   render() {
     return (
