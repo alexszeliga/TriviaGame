@@ -11,7 +11,7 @@ class TriviaGame extends Component {
           "Welcom to Contrived-ia! Set your options below, then click here to start game!",
         answers: [
           {
-            text: "Number of Questions: ",
+            text: "Click here to set the number of Questions: ",
             correct: false,
             id: 0,
             changeOption: () => {
@@ -39,7 +39,7 @@ class TriviaGame extends Component {
             }
           },
           {
-            text: "Difficulty: ",
+            text: "Click here to set the time per question",
             correct: false,
             id: 1,
             changeOption: () => {
@@ -226,20 +226,20 @@ class TriviaGame extends Component {
         ]
       },
       {
-        text: "Endgame Mode: Do things like score and stats and restart here.",
+        text: "Game Over! Do things like look at your score and restart here.",
         answers: [
           {
-            text: "Total Correct: " + this.totalOutput,
+            text: "",
             correct: false,
             id: 0
           },
-          { text: "Time stats?", correct: false, id: 1 },
+          { text: "", correct: false, id: 1 },
           {
-            text: "Restart Game",
+            text: "",
             correct: false,
             id: 2
           },
-          { text: "Created by Alex Szeliga in 2018", correct: false, id: 3 }
+          { text: "", correct: false, id: 3 }
         ]
       }
     ],
@@ -310,7 +310,6 @@ class TriviaGame extends Component {
         }
         clearInterval(this.state.gameTimer);
         this.setState({ gameState: 11 });
-
         break;
       default:
         {
@@ -358,6 +357,11 @@ class TriviaGame extends Component {
     //start the timer
     this.setState({ gameTimer: setInterval(this.timerTick, 1000) });
   };
+  reInit = () => {
+    this.setState({ gameState: 0 });
+    this.setState({ remainingQuestions: this.state.totalQuestions });
+    this.setState({ timeLeft: this.state.defaultTime });
+  };
   render() {
     return (
       <div>
@@ -377,6 +381,20 @@ class TriviaGame extends Component {
           gameState={this.state.gameState}
           totalQuestions={this.state.totalQuestions}
         />
+        {this.state.gameState === 11 ? (
+          <div className="row alert alert-secondary">
+            You got{" "}
+            {Math.floor(
+              (this.state.correctAnswers / this.state.totalQuestions) * 100
+            )}
+            % correct!
+          </div>
+        ) : null}
+        {this.state.gameState === 11 ? (
+          <div className="row alert alert-secondary" onClick={this.reInit}>
+            Restart
+          </div>
+        ) : null}
       </div>
     );
   }
