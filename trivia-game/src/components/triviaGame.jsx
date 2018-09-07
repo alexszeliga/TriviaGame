@@ -69,7 +69,7 @@ class TriviaGame extends Component {
             id: 2
           },
           {
-            text: "Created by Alex Szeliga in 2018",
+            text: "",
             correct: false,
             id: 3,
             changeOption: () => {
