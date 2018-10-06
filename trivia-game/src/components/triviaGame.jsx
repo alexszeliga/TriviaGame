@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Question from "./question";
 import AnswerBank from "./answerBank";
 import StatusBar from "./statusBar";
+
 var gameQuestions = [
   {
     text:
@@ -10,55 +11,21 @@ var gameQuestions = [
       {
         text: "Click here to set the number of Questions: ",
         correct: false,
-        id: 0,
-        changeOption: () => {
-          console.log("Change clicked");
-          //TODO 3, 6, or 10 questions
-          switch (this.state.remainingQuestions) {
-            case 10:
-              // down to 6
-              this.setState({ remainingQuestions: 6 });
-              this.setState({ totalQuestions: 6 });
-              break;
-            case 6:
-              //down to 3
-              this.setState({ remainingQuestions: 3 });
-              this.setState({ totalQuestions: 3 });
-              break;
-            case 3:
-              // up to 10
-              this.setState({ remainingQuestions: 10 });
-              this.setState({ totalQuestions: 10 });
-              break;
-            default:
-              break;
-          }
-        }
+        id: 0
+        // changeOption: () => {
+        //   console.log("Change clicked");
+        //   //TODO 3, 6, or 10 questions
+        // }
       },
       {
         text: "Click here to set the time per question",
         correct: false,
-        id: 1,
-        changeOption: () => {
-          console.log("Change Option Clicked");
-          // TODO Easy, Medium, Hard (15 seconds per q, 10sec, 7sec)
-          switch (this.state.timeLeft) {
-            case 15:
-              // down to 10
-              this.setState({ timeLeft: 10, defaultTime: 10 });
-              break;
-            case 10:
-              //down to 7
-              this.setState({ timeLeft: 7, defaultTime: 7 });
-              break;
-            case 7:
-              // up to 15
-              this.setState({ timeLeft: 15, defaultTime: 15 });
-              break;
-            default:
-              break;
-          }
-        }
+        id: 1
+        // changeOption: () => {
+        //   console.log("Change Option Clicked");
+        //   // TODO Easy, Medium, Hard (15 seconds per q, 10sec, 7sec)
+
+        // }
       },
       {
         text: "",
@@ -68,10 +35,10 @@ var gameQuestions = [
       {
         text: "",
         correct: false,
-        id: 3,
-        changeOption: () => {
-          console.log("Change Option Clicked");
-        }
+        id: 3
+        // changeOption: () => {
+        //   console.log("Change Option Clicked");
+        // }
       }
     ]
   },
@@ -252,6 +219,48 @@ class TriviaGame extends Component {
     totalQuestions: 10,
     gameMessage: ""
   };
+  changeOption = index => {
+    if (index === 0) {
+      // questions
+      switch (this.state.remainingQuestions) {
+        case 10:
+          // down to 6
+          this.setState({ remainingQuestions: 6 });
+          this.setState({ totalQuestions: 6 });
+          break;
+        case 6:
+          //down to 3
+          this.setState({ remainingQuestions: 3 });
+          this.setState({ totalQuestions: 3 });
+          break;
+        case 3:
+          // up to 10
+          this.setState({ remainingQuestions: 10 });
+          this.setState({ totalQuestions: 10 });
+          break;
+        default:
+          break;
+      }
+    } else {
+      // time
+      switch (this.state.timeLeft) {
+        case 15:
+          // down to 10
+          this.setState({ timeLeft: 10, defaultTime: 10 });
+          break;
+        case 10:
+          //down to 7
+          this.setState({ timeLeft: 7, defaultTime: 7 });
+          break;
+        case 7:
+          // up to 15
+          this.setState({ timeLeft: 15, defaultTime: 15 });
+          break;
+        default:
+          break;
+      }
+    }
+  };
   timerTick = () => {
     if (this.state.timeLeft > 0) {
       this.setState({ timeLeft: this.state.timeLeft - 1 });
@@ -282,7 +291,9 @@ class TriviaGame extends Component {
     switch (this.state.gameState) {
       case 0:
         {
-          gameQuestions[this.state.gameState].answers[answerId].changeOption();
+          this.changeOption(
+            gameQuestions[this.state.gameState].answers[answerId].id
+          );
         }
         break;
       case this.state.totalQuestions:
